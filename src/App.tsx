@@ -19,7 +19,8 @@ function App() {
 
     current.value = current.value.substring(0, start) + "\t" + current.value.substring(end);
 
-    current.selectionStart = current.selectionEnd + start + 1
+    current.selectionStart = start + 1
+    current.selectionEnd = start + 1
   }
 
   useEffect(() => {
