@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 function App() {
   let areaRef = useRef<HTMLTextAreaElement>(null)
+  const [tabs, setTabs] = useState(4)
 
   function keyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
     if (e.key !== "Tab") {
@@ -17,10 +18,10 @@ function App() {
     let start = current.selectionStart;
     let end = current.selectionEnd;
 
-    current.value = current.value.substring(0, start) + "\t" + current.value.substring(end);
+    current.value = current.value.substring(0, start) + " ".repeat(tabs) + current.value.substring(end);
 
-    current.selectionStart = start + 1
-    current.selectionEnd = start + 1
+    current.selectionStart = start + tabs
+    current.selectionEnd = start + tabs
   }
 
   useEffect(() => {
@@ -28,8 +29,9 @@ function App() {
   })
 
   return (
-    <div className="flex w-screen h-screen">
+    <div className="flex w-screen h-screen flex-col">
       <textarea className="grow font-mono" placeholder="Start Typing..." onKeyDown={keyDown} ref={areaRef} />
+      <input type="range" name="tab" min={2} max={16} />
     </div>
   );
 }
