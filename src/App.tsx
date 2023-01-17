@@ -1,9 +1,30 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 function App() {
+  let areaRef = useRef<HTMLTextAreaElement>(null)
+
+  function keyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
+    if (e.key !== "Tab") {
+      return
+    }
+    e.preventDefault()
+    let current = areaRef.current
+
+    if (current === null) {
+      return
+    }
+
+    let start = current.selectionStart;
+    let end = current.selectionEnd;
+
+    current.value = current.value.substring(0, start) + "\t" + current.value.substring(end);
+
+    current.selectionStart = current.selectionEnd + start + 1
+  }
+
   return (
     <div className="flex w-screen h-screen">
-      <textarea className="grow font-mono" placeholder="Start Typing..." />
+      <textarea className="grow font-mono" placeholder="Start Typing..." onKeyDown={keyDown} ref={areaRef} />
     </div>
   );
 }
