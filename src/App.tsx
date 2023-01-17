@@ -24,6 +24,11 @@ function App() {
     current.selectionEnd = start + tabs
   }
 
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const setTo = parseInt(e.target.value)
+    setTabs(setTo)
+  }
+
   useEffect(() => {
     areaRef.current?.focus()
   })
@@ -31,8 +36,11 @@ function App() {
   return (
     <div className="flex w-screen h-screen flex-col">
       <textarea className="grow font-mono" placeholder="Start Typing..." onKeyDown={keyDown} ref={areaRef} />
-      <input type="range" name="tab" min={2} max={16} />
-    </div>
+      <div className="flex">
+        <input type="range" name="tab" min={2} max={16} value={tabs} onChange={handleChange} className="grow" />
+        <span>{tabs}</span>
+      </div>
+    </div> 
   );
 }
 
