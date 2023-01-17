@@ -30,7 +30,7 @@ function App() {
   }
 
   return (
-    <div className="flex w-screen h-screen flex-col">
+    <div className="flex w-screen h-screen flex-col p-4">
       <datalist id="tabstops">
         <option value={2} />
         <option value={4} />
