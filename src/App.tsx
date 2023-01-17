@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 function App() {
   let areaRef = useRef<HTMLTextAreaElement>(null)
@@ -21,6 +21,10 @@ function App() {
 
     current.selectionStart = current.selectionEnd + start + 1
   }
+
+  useEffect(() => {
+    areaRef.current?.focus()
+  })
 
   return (
     <div className="flex w-screen h-screen">
