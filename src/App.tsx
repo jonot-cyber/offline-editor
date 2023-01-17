@@ -50,8 +50,9 @@ function App() {
       </datalist>
       <textarea className="grow font-mono resize-none outline-none text-xl bg-[#ECEFF4] dark:bg-[#2E3440] text-[#2E3440] dark:text-[#ECEFF4] placeholder:text-[#4C566A] placeholder:dark:text-[#D8DEE9]" placeholder="Start Typing..." onKeyDown={keyDown} onChange={saveText} ref={areaRef} autoFocus spellCheck={false} />
       <div className="flex">
+        <span className="text-[#2E3440] dark:text-[#ECEFF4] mr-2">Tab Size:</span>
         <input type="range" name="tab" min={2} max={16} value={tabs} onChange={handleChange} className="grow" list="tabstops" />
-        <span className="dark:text-[#ECEFF4]">{tabs}</span>
+        <span className="text-[#2E3440] dark:text-[#ECEFF4]">{tabs}</span>
       </div>
     </div> 
   );
