@@ -29,15 +29,17 @@ function App() {
     setTabs(setTo)
   }
 
-  useEffect(() => {
-    areaRef.current?.focus()
-  })
-
   return (
     <div className="flex w-screen h-screen flex-col">
-      <textarea className="grow font-mono resize-none" placeholder="Start Typing..." onKeyDown={keyDown} ref={areaRef} />
+      <datalist id="tabstops">
+        <option value={2} />
+        <option value={4} />
+        <option value={8} />
+        <option value={16} />
+      </datalist>
+      <textarea className="grow font-mono resize-none" placeholder="Start Typing..." onKeyDown={keyDown} ref={areaRef} autoFocus />
       <div className="flex">
-        <input type="range" name="tab" min={2} max={16} value={tabs} onChange={handleChange} className="grow" />
+        <input type="range" name="tab" min={2} max={16} value={tabs} onChange={handleChange} className="grow" list="tabstops" />
         <span>{tabs}</span>
       </div>
     </div> 
