@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 function App() {
   let areaRef = useRef<HTMLTextAreaElement>(null)
@@ -29,6 +29,17 @@ function App() {
     setTabs(setTo)
   }
 
+  function saveText(e: React.ChangeEvent<HTMLTextAreaElement>) {
+    localStorage.setItem("contents", e.target.value)
+  }
+
+  useEffect(() => {
+    const saved = localStorage.getItem("contents")
+    if (saved && areaRef.current) {
+      areaRef.current.value = saved;
+    }
+  })
+
   return (
     <div className="flex w-screen h-screen flex-col p-4 bg-[#ECEFF4] dark:bg-[#2E3440]">
       <datalist id="tabstops">
@@ -37,7 +48,7 @@ function App() {
         <option value={8} />
         <option value={16} />
       </datalist>
-      <textarea className="grow font-mono resize-none outline-none text-xl bg-[#ECEFF4] dark:bg-[#2E3440] text-[#2E3440] dark:text-[#ECEFF4] placeholder:text-[#4C566A] placeholder:dark:text-[#D8DEE9]" placeholder="Start Typing..." onKeyDown={keyDown} ref={areaRef} autoFocus spellCheck={false} />
+      <textarea className="grow font-mono resize-none outline-none text-xl bg-[#ECEFF4] dark:bg-[#2E3440] text-[#2E3440] dark:text-[#ECEFF4] placeholder:text-[#4C566A] placeholder:dark:text-[#D8DEE9]" placeholder="Start Typing..." onKeyDown={keyDown} onChange={saveText} ref={areaRef} autoFocus spellCheck={false} />
       <div className="flex">
         <input type="range" name="tab" min={2} max={16} value={tabs} onChange={handleChange} className="grow" list="tabstops" />
         <span className="dark:text-[#ECEFF4]">{tabs}</span>
