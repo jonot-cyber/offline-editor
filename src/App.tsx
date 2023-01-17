@@ -37,7 +37,7 @@ function App() {
         <option value={8} />
         <option value={16} />
       </datalist>
-      <textarea className="grow font-mono resize-none" placeholder="Start Typing..." onKeyDown={keyDown} ref={areaRef} autoFocus />
+      <textarea className="grow font-mono resize-none" placeholder="Start Typing..." onKeyDown={keyDown} ref={areaRef} autoFocus spellCheck={false} />
       <div className="flex">
         <input type="range" name="tab" min={2} max={16} value={tabs} onChange={handleChange} className="grow" list="tabstops" />
         <span>{tabs}</span>
